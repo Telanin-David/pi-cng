@@ -1,26 +1,75 @@
+@config "../../tailwind.config.ts";
 @import "tailwindcss";
+@import "../styles/tokens.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Base defaults */
+@layer base {
+  body { background: hsl(var(--bg)); color: hsl(var(--fg)); }
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/*  Tailwind-callable design system classes */
+@layer components {
+  /* layout */
+  .ds-container { @apply mx-auto w-full px-4 md:px-8 lg:px-12 xl:px-[72px] ;}
+  .ds-grid { @apply grid grid-cols-12 gap-y-6 gap-x-4 md:gap-x-5 xl:gap-x-6; }
+  .ds-section { @apply py-14 md:py-20; }
+  .ds-section-muted { background: hsl(var(--muted)); }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* type */
+  .ds-display { @apply text-display font-semibold; }
+  .ds-h1 { @apply text-h1 font-semibold; }
+  .ds-h2 { @apply text-h2 font-semibold; }
+  .ds-h3 { @apply text-h3 font-semibold; }
+  .ds-h4 { @apply text-h4 font-semibold; }
+  .ds-lead { @apply text-[1.05rem] md:text-[1.125rem] leading-relaxed text-muted-fg; }
+  .ds-body { @apply text-body; }
+  .ds-small { @apply text-small text-muted-fg; }
+  .ds-caption { @apply text-caption text-muted-fg; }
+
+  /* surfaces */
+  .ds-card { @apply rounded-lg bg-card border border-border shadow-soft; }
+  .ds-card-muted { @apply rounded-lg bg-card-2 border border-border; }
+
+  /* buttons (Tailwind v4 safe: variants do NOT @apply ds-btn) */
+  .ds-btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-small font-semibold
+    transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/35;
   }
+  .ds-btn-primary { @apply bg-brand text-brand-fg hover:bg-brand-600; }
+ 
+  .ds-btn-outline { @apply border border-border bg-card; }
+  .ds-btn-outline:hover { background: hsl(var(--muted)); }
+  
+  .ds-btn-ghost { @apply bg-transparent; }
+  .ds-btn-ghost:hover { background: hsl(var(--muted)); }
+   /* accent (secondary yellow) */
+   .ds-btn-accent {
+    @apply bg-accent text-accent-fg hover:bg-accent-600
+    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/35;
+  }
+
+  .ds-badge-accent {
+    @apply inline-flex items-center rounded-full bg-accent-100 px-3 py-1 text-caption font-semibold text-accent-900;
+  }
+  /* inputs (Tailwind v4 safe: textarea does NOT @apply ds-input) */
+  .ds-input {
+    @apply w-full rounded-md border border-border bg-card px-3 py-2 text-body
+    placeholder:text-muted-fg
+    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/35;
+  }
+  .ds-textarea {
+    @apply w-full rounded-md border border-border bg-card px-3 py-2 text-body
+    placeholder:text-muted-fg
+    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/35
+    min-h-[120px] resize-y;
+  }
+
+
+  /* badges */
+  .ds-badge { @apply inline-flex items-center rounded-full bg-brand-100 px-3 py-1 text-caption font-semibold text-brand-800; }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .ds-hoverlift { @apply transition-transform duration-200 hover:-translate-y-1; }
+  .ds-fade-up { @apply animate-fade-up; }
 }
