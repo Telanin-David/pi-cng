@@ -37,37 +37,42 @@ export default function SplitButton({
   const Root: any = href ? Link : "button";
   const rootProps = href ? { href } : { type: "button", onClick };
 
-  // Base styling
-  const leftBg = isLight ? "bg-white" : "bg-brand";
-  const rightBg = isLight ? "bg-white" : "bg-brand";
-  const text = isLight ? "text-black" : "text-brand-fg";
+  /**
+   * ✅ NEW: Light variant turns brand green on hover/active
+   * - Left/Right blocks: bg-white -> bg-brand
+   * - Text: text-black -> text-brand-fg
+   */
+  const leftBg = isLight ? "bg-white group-hover:bg-brand group-active:bg-brand" : "bg-brand";
+  const rightBg = isLight ? "bg-white group-hover:bg-brand group-active:bg-brand" : "bg-brand";
+  const text = isLight
+    ? "text-black group-hover:text-brand-fg group-active:text-brand-fg"
+    : "text-brand-fg";
 
-  // Circle behavior:
+  // Circle behavior (unchanged from your intent)
   // Idle:
   // - light: black circle + white arrow
-  // - brand: white circle + BLACK arrow (changed)
-  // Active (hover/click):
-  // - light: accent circle + black arrow (same as before)
-  // - brand: brand-essence circle + BLACK arrow (changed)
+  // - brand: white circle + BLACK arrow
+  // Active:
+  // - light: accent circle + black arrow
+  // - brand: accent circle + BLACK arrow
   const circleIdle = isLight ? "bg-black" : "bg-white";
   const circleActiveLight = "group-hover:bg-accent group-active:bg-accent";
   const circleActiveBrand = "group-hover:bg-accent group-active:bg-accent";
 
-  const arrowClassLight = "text-white group-hover:text-black group-active:text-black";
-  const arrowClassBrand = "text-black"; // always black
+  const arrowClassLight = "text-white group-hover:text-brand group-active:text-brand";
+  const arrowClassBrand = "text-brand"; // always black
 
   return (
     <motion.div
       className={className}
       style={{ height: heightPx }}
-      whileHover={{}}
       whileTap={{ scale: 0.99 }}
       transition={{ duration: 0.18 }}
     >
       <Root
         {...rootProps}
         className={[
-          "group inline-flex h-full overflow-hidden ",
+          "group inline-flex h-full overflow-hidden",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/35",
         ].join(" ")}
       >
@@ -81,18 +86,21 @@ export default function SplitButton({
             "uppercase tracking-wide",
             "text-[18px] md:text-[18px]",
             "whitespace-nowrap",
+            "transition-colors duration-200", // ✅ smooth bg/text transition
           ].join(" ")}
           style={{ height: heightPx }}
         >
           {children}
         </div>
 
-        {/* Right icon block (width=52px) */}
+        {/* Right icon block */}
         <div
           className={[
             "flex h-full items-center justify-center",
             rightBg,
-            "border-l border-black/10",
+            // keep divider subtle; still works when bg turns brand
+            "border-l border-black/10 group-hover:border-white/20 group-active:border-white/20",
+            "transition-colors duration-200",
           ].join(" ")}
           style={{ width: iconBlockPx, height: heightPx }}
         >
