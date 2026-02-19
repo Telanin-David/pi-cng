@@ -97,13 +97,13 @@ export default function AboutUsSection() {
             {/* mobile = stacked, desktop = two columns with auto middle space */}
             <div className="flex flex-col mx-5 md:mx-36 gap-y-8 lg:flex-row lg:items-start lg:justify-between">
                 {/* LEFT */}
-                <div className="w-full lg:w-auto md:mt-8">
+                <div className="w-full lg:w-auto md:mt-12">
                 <div className="w-full max-w-[500px]">
                     <p className="text-[12px] uppercase tracking-[0.12em] text-brand">
                     ABOUT US
                     </p>
 
-                    <h2 className="mt-4 text-[36px] sm:text-[40px] lg:text-[44px] leading-[1.05] font-extrabold tracking-[-0.03em] text-black">
+                    <h2 className="mt-4 text-[32px] sm:text-[32px] lg:text-[38px] leading-[1.05] font-extrabold tracking-[-0.03em] text-black">
                     Empowering a Cleaner,
                     <br />
                     Cheaper Future Together
