@@ -106,7 +106,7 @@ export default function Hero() {
               <div className="absolute left-[180px] top-[232px] w-[520px]">
                 <h1
                   className={clsx(
-                    "ds-h1 text-white whitespace-pre-line",
+                    "ds-h2 text-white whitespace-pre-line",
                     "text-[32px] leading-[1.05] lg:text-[52px] lg:leading-[1.05]",
                     "min-h-[120px]"
                   )}
