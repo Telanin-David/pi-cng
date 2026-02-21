@@ -102,7 +102,7 @@ export default function Hero() {
           <div className="relative z-10 h-full">
             {/* Desktop fixed placement */}
             <div className="hidden lg:block">
-              {/* ✅ replaced */}
+              {/* ✅ replaced */} 
               <div className="absolute left-[180px] top-[232px] w-[520px]">
                 <h1
                   className={clsx(
